@@ -1,0 +1,18 @@
+{% extends 'wk3/layout.html' %}
+
+{% block body %}
+    <a href="{% url 'wk3:index' %}">Mainpage</a>
+    <h1>Sussy</h1>
+    <form action="{% url 'wk3:sussy' %}" method="post">
+        
+        {% csrf_token %}
+        
+        {{ form }}
+        <input type="submit">
+    </form>
+    
+    {% if result %}
+        <h2>Your result:</h2>
+        {{ result }}
+    {% endif %}
+{% endblock %}
