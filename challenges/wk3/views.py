@@ -1,3 +1,5 @@
+# considering that I'm using the same form for both madlibs this is so inefficient
+
 from django.shortcuts import render
 from django import forms
 
@@ -26,5 +28,21 @@ def sussy(request):
                 "form": form
             })
     return render(request, "wk3/sussy.html", {
+        "form": MadLib()
+    })
+def bob(request):
+    if request.method == "POST":
+        form = MadLib(request.POST)
+        if form.is_valid():
+            results = list(form.clean().values())
+            return render(request, "wk3/bob.html", {
+                    "form": form,
+                    "result": f"Bob the {results[0]} builder {results[1]} to the farmer's market. He bought some {results[2]} vegetables and {results[3]} fruits. Then he {results[4]} home."
+                })
+        else:
+            return render(request, "wk3/bob.html", {
+                "form": form
+            })
+    return render(request, "wk3/bob.html", {
         "form": MadLib()
     })
