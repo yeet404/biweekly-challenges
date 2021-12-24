@@ -3,6 +3,8 @@ class SeatLayout:
 
     # length x width format
     def __init__(self, col, row):
+        self.col = col
+        self.row = row
         for i in range(row):
             self.layout.append([0 for j in range(col)])
 
@@ -32,7 +34,7 @@ class SeatLayout:
         pass
 
     def print(self):
-        for i in range(self.w):
+        for i in range(self.row):
             print(*self.layout[i])
 
 def main():
