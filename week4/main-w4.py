@@ -1,3 +1,4 @@
+DEBUG = True
 FILL = 0
 
 # src: https://stackoverflow.com/a/30650004
@@ -15,7 +16,7 @@ class SeatLayout:
         self.col = col
         self.row = row
         for i in range(row):
-            self.layout.append([FILL for j in range(col)])
+            self.layout.append(strictlist(FILL for j in range(col)))
 
     # expects 0-indexed
     def add(self, row, col, name):
@@ -35,9 +36,7 @@ class SeatLayout:
                 print("Seat empty.")
         except IndexError:
             print("Invalid seat.")
-    
-    # inconsistent return types (void, list) since printing to console anyways
-    # this probably isn't a good idea but idk lol
+
     def find_exposed(self, row, col):
         RADIUS = 1
 
@@ -49,7 +48,7 @@ class SeatLayout:
             print("Invalid seat.")
 
         # this is so bad lol
-        # finds people exposed 
+        # finds people exposed
         exposed = []
         seats = [(RADIUS, 0), (0, RADIUS)]
         for i in seats:
@@ -75,33 +74,39 @@ class SeatLayout:
     # DEBUG
     def debug(self, type):
         if type == "remove":
-           for i in range(1, self.row+1):
-                for j in range(1, self.col+1):
+           for i in range(self.row):
+                for j in range(self.col):
                     self.remove(i, j) 
         if type == "add":
-            for i in range(1, self.row+1):
-                for j in range(1, self.col+1):
+            for i in range(self.row):
+                for j in range(self.col):
                     self.add(i, j, "Bob")
 
-def main():
+def debug():
     test = SeatLayout(3, 4)
-    print(test.layout)
-    test.add(3, 2, "Bob") # add
-    test.add(2, 2, "yeet") # add+remove
-    test.remove(2, 2)
-    test.add(3, 2, "Rob") # add occupied
-    test.remove(0, 0) # remove empty
-    test.add(100, 100, "asdf") # add invalid
-    test.remove(1000, 34) # remove invalid
+    # print(test.layout)
+    # test.add(3, 2, "Bob") # add
+    # test.add(2, 2, "yeet") # add+remove
+    # test.remove(2, 2)
+    # test.add(3, 2, "Rob") # add occupied
+    # test.remove(0, 0) # remove empty
+    # test.add(100, 100, "asdf") # add invalid
+    # test.remove(1000, 34) # remove invalid
     
-    test.add(-1, -1, "Negative") # add invalid (neg)
-    test.remove(-2, -3) # remove invalid (neg)
+    # test.add(-1, -1, "Negative") # add invalid (neg)
+    # test.remove(-2, -3) # remove invalid (neg)
 
-    # test.debug("add")
+    test.debug("add")
 
-    # test.find_exposed(1, 1)
+    test.find_exposed(1, 0)
 
-    print(test.layout)
+    test.print()
+
+def main():
+    pass
 
 if __name__ == "__main__":
-    main()
+    if DEBUG:
+        debug()
+    else:
+        main()
