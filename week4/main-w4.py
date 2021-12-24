@@ -1,10 +1,10 @@
 class SeatLayout:
     layout = []
-    def __init__(self, l, w):
-        self.l = l
-        self.w = w
-        for i in range(self.w):
-            self.layout.append([0 for j in range(self.l)])
+
+    # length x width format
+    def __init__(self, col, row):
+        for i in range(row):
+            self.layout.append([0 for j in range(col)])
 
     def add(self, row, col):
         row -= 1
@@ -27,6 +27,9 @@ class SeatLayout:
                 print("Seat empty.")
         except IndexError:
             print("Invalid seat.")
+
+    def exposed(self, row, col):
+        pass
 
     def print(self):
         for i in range(self.w):
