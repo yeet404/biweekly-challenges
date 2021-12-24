@@ -17,14 +17,8 @@ class SeatLayout:
         for i in range(row):
             self.layout.append([FILL for j in range(col)])
 
+    # expects 0-indexed
     def add(self, row, col, name):
-        # TODO: refactor this repetitive check
-        row -= 1
-        col -= 1
-        if row < 0 or col < 0:
-            print("Invalid seat.")
-            return
-
         try:
             if not self.layout[row][col]:
                 self.layout[row][col] = str(name)
@@ -34,12 +28,6 @@ class SeatLayout:
             print("Invalid seat.")
 
     def remove(self, row, col):
-        row -= 1
-        col -= 1
-        if row < 0 or col < 0:
-            print("Invalid seat.")
-            return
-        
         try:
             if self.layout[row][col]:
                 self.layout[row][col] = 0
@@ -52,12 +40,6 @@ class SeatLayout:
     # this probably isn't a good idea but idk lol
     def find_exposed(self, row, col):
         RADIUS = 1
-        row -= 1
-        col -= 1
-        
-        if row < 0 or col < 0:
-            print("Invalid seat.")
-            return
 
         try:
             if not self.layout[row][col]:
@@ -103,22 +85,23 @@ class SeatLayout:
 
 def main():
     test = SeatLayout(3, 4)
-    # test.add(4, 3, "Bob") # add
-    # test.add(3, 3, "yeet") # add+remove
-    # test.remove(3, 3)
-    # test.add(4, 3, "Rob") # add occupied
-    # test.remove(1, 1) # remove empty
-    # test.add(100, 100, "asdf") # add invalid
-    # test.remove(1000, 34) # remove invalid
+    print(test.layout)
+    test.add(3, 2, "Bob") # add
+    test.add(2, 2, "yeet") # add+remove
+    test.remove(2, 2)
+    test.add(3, 2, "Rob") # add occupied
+    test.remove(0, 0) # remove empty
+    test.add(100, 100, "asdf") # add invalid
+    test.remove(1000, 34) # remove invalid
     
-    # test.add(-1, -1, "Negative") # add invalid (neg)
-    # test.remove(-2, -3) # remove invalid (neg)
+    test.add(-1, -1, "Negative") # add invalid (neg)
+    test.remove(-2, -3) # remove invalid (neg)
 
-    test.debug("add")
+    # test.debug("add")
 
-    test.find_exposed(1, 1)
+    # test.find_exposed(1, 1)
 
-    test.print()
+    print(test.layout)
 
 if __name__ == "__main__":
     main()
