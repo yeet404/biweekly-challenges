@@ -1,7 +1,14 @@
 FILL = 0
 
+# src: https://stackoverflow.com/a/30650004
+class strictlist(list):
+    def __getitem__(self, n):
+        if n < 0:
+            raise IndexError("...")
+        return list.__getitem__(self, n)
+
 class SeatLayout:
-    layout = []
+    layout = strictlist()
 
     # init using length by width format
     def __init__(self, col, row):
@@ -107,9 +114,9 @@ def main():
     # test.add(-1, -1, "Negative") # add invalid (neg)
     # test.remove(-2, -3) # remove invalid (neg)
 
-    # test.debug("add")
+    test.debug("add")
 
-    test.find_exposed(2, 2)
+    test.find_exposed(1, 1)
 
     test.print()
 
