@@ -8,12 +8,12 @@ class SeatLayout:
         for i in range(row):
             self.layout.append([0 for j in range(col)])
 
-    def add(self, row, col):
+    def add(self, row, col, name):
         row -= 1
         col -= 1
         try:
             if not self.layout[row][col]:
-                self.layout[row][col] = 1
+                self.layout[row][col] = str(name)
             else:
                 print("Seat occupied.")
         except IndexError:
@@ -30,8 +30,9 @@ class SeatLayout:
         except IndexError:
             print("Invalid seat.")
 
-    def exposed(self, row, col):
-        pass
+    def get_exposed(self, row, col):
+        RADIUS = 1
+        print("")
 
     def print(self):
         for i in range(self.row):
@@ -39,12 +40,12 @@ class SeatLayout:
 
 def main():
     test = SeatLayout(3, 4)
-    test.add(4, 3) # add
-    test.add(3, 3) # add+remove
+    test.add(4, 3, "Bob") # add
+    test.add(3, 3, "yeet") # add+remove
     test.remove(3, 3)
-    test.add(4, 3) # add occupied
+    test.add(4, 3, "Rob") # add occupied
     test.remove(1, 1) # remove empty
-    test.add(100, 100) # add invalid
+    test.add(100, 100, "asdf") # add invalid
     test.remove(1000, 34) # remove invalid
     
     test.print()
