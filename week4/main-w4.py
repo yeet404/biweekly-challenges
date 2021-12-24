@@ -1,10 +1,6 @@
 import sys
 
-DEBUG = True
 FILL = 0
-
-def inputf():
-    return sys.stdin.readline().split()
 
 # src: https://stackoverflow.com/a/30650004
 class strictlist(list):
@@ -69,7 +65,8 @@ class SeatLayout:
             except IndexError:
                 pass
         
-        print(exposed)
+        print("Person(s) exposed: \n - ", end="")
+        print(*exposed, sep="\n - ")
     
     def print(self):
         for i in range(self.row):
@@ -86,26 +83,8 @@ class SeatLayout:
                 for j in range(self.col):
                     self.add(i, j, "Bob")
 
-def debug():
-    # test = SeatLayout(3, 4)
-    # print(test.layout)
-    # test.add(3, 2, "Bob") # add
-    # test.add(2, 2, "yeet") # add+remove
-    # test.remove(2, 2)
-    # test.add(3, 2, "Rob") # add occupied
-    # test.remove(0, 0) # remove empty
-    # test.add(100, 100, "asdf") # add invalid
-    # test.remove(1000, 34) # remove invalid
-    
-    # test.add(-1, -1, "Negative") # add invalid (neg)
-    # test.remove(-2, -3) # remove invalid (neg)
-
-    # test.debug("add")
-
-    # test.find_exposed(1, 0)
-
-    # test.print()
-    pass
+def inputf():
+    return sys.stdin.readline().split()
 
 # input is 1-indexed
 def main():
@@ -117,7 +96,6 @@ def main():
         if cmd == "create":
             try:
                 s = SeatLayout(int(i[1]), int(i[2]))
-                s.debug("add")
             except (IndexError, ValueError):
                 print("Invalid syntax.")
         elif cmd == "add":
@@ -137,7 +115,7 @@ def main():
                 print("Invalid syntax.")
         elif cmd == "exposed":
             try:
-                s.find_exposed(int(i[1]-1), int(i[2])-1)
+                s.find_exposed(int(i[1])-1, int(i[2])-1)
             except (IndexError, ValueError, AttributeError):
                 print("Invalid syntax.")
         elif cmd == "del":
