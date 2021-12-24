@@ -1,5 +1,10 @@
+import sys
+
 DEBUG = True
 FILL = 0
+
+def inputf():
+    return sys.stdin.readline().split()
 
 # src: https://stackoverflow.com/a/30650004
 class strictlist(list):
@@ -9,16 +14,15 @@ class strictlist(list):
         return list.__getitem__(self, n)
 
 class SeatLayout:
-    layout = strictlist()
-
     # init using length by width format
     def __init__(self, col, row):
+        self.layout = strictlist()
         self.col = col
         self.row = row
         for i in range(row):
             self.layout.append(strictlist(FILL for j in range(col)))
 
-    # expects 0-indexed
+    # converts to 0-index
     def add(self, row, col, name):
         try:
             if not self.layout[row][col]:
@@ -83,7 +87,7 @@ class SeatLayout:
                     self.add(i, j, "Bob")
 
 def debug():
-    test = SeatLayout(3, 4)
+    # test = SeatLayout(3, 4)
     # print(test.layout)
     # test.add(3, 2, "Bob") # add
     # test.add(2, 2, "yeet") # add+remove
@@ -96,17 +100,53 @@ def debug():
     # test.add(-1, -1, "Negative") # add invalid (neg)
     # test.remove(-2, -3) # remove invalid (neg)
 
-    test.debug("add")
+    # test.debug("add")
 
-    test.find_exposed(1, 0)
+    # test.find_exposed(1, 0)
 
-    test.print()
-
-def main():
+    # test.print()
     pass
 
+# input is 1-indexed
+def main():
+    print("-----\nSeating Organizer - yeet404\n-----")
+    s = None
+    while True:
+        i = inputf()
+        cmd = i[0]
+        if cmd == "create":
+            try:
+                s = SeatLayout(int(i[1]), int(i[2]))
+                s.debug("add")
+            except (IndexError, ValueError):
+                print("Invalid syntax.")
+        elif cmd == "add":
+            try:
+                s.add(int(i[1])-1, int(i[2])-1, i[3])
+            except (IndexError, ValueError, AttributeError):
+                print("Invalid syntax.")
+        elif cmd == "rm":
+            try:
+                s.remove(int(i[1])-1, int(i[2])-1)
+            except (IndexError, ValueError, AttributeError):
+                print("Invalid syntax.")
+        elif cmd == "print":
+            try:
+                s.print()
+            except (UnboundLocalError, AttributeError):
+                print("Invalid syntax.")
+        elif cmd == "exposed":
+            try:
+                s.find_exposed(int(i[1]-1), int(i[2])-1)
+            except (IndexError, ValueError, AttributeError):
+                print("Invalid syntax.")
+        elif cmd == "del":
+            del s
+        elif cmd == "end":
+            break
+        else:
+            print("Invalid command.")
+        print()
+
 if __name__ == "__main__":
-    if DEBUG:
-        debug()
-    else:
-        main()
+    main()
