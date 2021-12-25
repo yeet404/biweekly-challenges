@@ -119,7 +119,6 @@ def main():
                 s.find_exposed(int(i[1])-1, int(i[2])-1)
             except (IndexError, ValueError, AttributeError):
                 print("Invalid syntax.")
-        # saves new obj each time, cannot rewrite old save without explicit deletion
         # overwrite by saving with same name as a previous save, or else new save is created
         elif cmd == "save":
             if s:
@@ -130,7 +129,10 @@ def main():
             else:
                 print("No layout to save.")
         elif cmd == "access":
-            s = saved[str(i[1])]
+            try:
+                s = saved[str(i[1])]
+            except (IndexError, KeyError):
+                print("Invalid syntax.")
         # del before save is equivalent to not saving, not deleting the save
         # must specify savename to delete save
         # this is not a good implementation lol
