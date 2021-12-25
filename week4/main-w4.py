@@ -90,6 +90,7 @@ def inputf():
 def main():
     print("-----\nSeating Organizer - yeet404\n-----")
     s = None
+    saved = {}
     while True:
         i = inputf()
         cmd = i[0]
@@ -118,10 +119,34 @@ def main():
                 s.find_exposed(int(i[1])-1, int(i[2])-1)
             except (IndexError, ValueError, AttributeError):
                 print("Invalid syntax.")
+        # saves new obj each time, cannot rewrite old save without explicit deletion
+        # overwrite by saving with same name as a previous save, or else new save is created
+        elif cmd == "save":
+            if s:
+                try:
+                    saved[str(i[1])] = s
+                except IndexError:
+                    print("Invalid syntax.")
+            else:
+                print("No layout to save.")
+        elif cmd == "access":
+            s = saved[str(i[1])]
+        # del before save is equivalent to not saving, not deleting the save
+        # must specify savename to delete save
+        # this is not a good implementation lol
         elif cmd == "del":
-            del s
+            if not s:
+                print("No layout to delete.\n")
+                continue
+            try:
+                if i[1] == "this":
+                    del s
+                else:
+                    del saved[str(i[1])]
+            except (IndexError, KeyError):
+                print("Invalid syntax.") 
         elif cmd == "end":
-            break
+            return
         else:
             print("Invalid command.")
         print()
