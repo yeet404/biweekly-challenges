@@ -1,3 +1,7 @@
+"""
+There is so much bad code in this lol.
+"""
+
 import sys
 
 FILL = 0
@@ -46,8 +50,7 @@ class SeatLayout:
         except IndexError:
             print("Invalid seat.")
 
-        # this is so bad lol
-        # finds people exposed
+        # ew
         exposed = []
         seats = [(RADIUS, 0), (0, RADIUS)]
         for i in seats:
@@ -71,7 +74,7 @@ class SeatLayout:
         for i in range(self.row):
             print(*self.layout[i])
     
-    # DEBUG
+    # DEBUG - fill/empty all seats
     def debug(self, type):
         if type == "remove":
            for i in range(self.row):
@@ -85,6 +88,7 @@ class SeatLayout:
 def inputf():
     return sys.stdin.readline().split()
 
+# yum spaghetti
 # input is 1-indexed
 def main():
     print("-----\nSeating Organizer - yeet404\n-----")
@@ -118,7 +122,6 @@ def main():
                 s.find_exposed(int(i[1])-1, int(i[2])-1)
             except (IndexError, ValueError, AttributeError):
                 print("Invalid syntax.")
-        # overwrite by saving with same name as a previous save, or else new save is created
         elif cmd == "save":
             if s:
                 try:
@@ -132,9 +135,7 @@ def main():
                 s = saved[str(i[1])]
             except (IndexError, KeyError):
                 print("Invalid syntax.")
-        # del before save is equivalent to not saving, not deleting the save
-        # must specify savename to delete save
-        # this is not a good implementation lol
+        # bad implementation
         elif cmd == "del":
             if not s:
                 print("No layout to delete.\n")

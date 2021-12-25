@@ -4,11 +4,11 @@ run with `python main-w4.py`
 
 ## Commands
 
-Note: All user input is 1-indexed. `main()` converts it into being 0-indexed as needed
+Note: All user input is 1-indexed. `main()` converts it into being 0-indexed as needed.
 
 `create`
 - usage: `create <int:col> <int:row>`
-- creates seating layout with given column and rows
+- creates seating layout with given columns and rows (length by width format)
 
 `add`
 - usage: `add <int:row> <int:col> <str:name>`
