@@ -59,6 +59,6 @@ But if the user specifies a seating layout, then that layout, within the diction
 
 ### Creating
 
-`create` creates a new `SeatLayout` object for `p` to point to. Therefore if `p->SeatLayoutObject` and the user then uses `create`, it is equivalent to `del SeatLayoutObject` => `create ...`.
+`create` creates a new `SeatLayout` object for `p` to point to. Therefore if `p->SeatLayoutObject` and the user then uses `create`, it is equivalent to `del this` => `create ...`.
 
 I'm guessing the garbage collector picks up the forgotten object? I have no idea lol.

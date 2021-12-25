@@ -18,7 +18,6 @@ class SeatLayout:
         for i in range(row):
             self.layout.append(strictlist(FILL for j in range(col)))
 
-    # converts to 0-index
     def add(self, row, col, name):
         try:
             if not self.layout[row][col]:
