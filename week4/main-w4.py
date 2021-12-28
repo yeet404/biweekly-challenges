@@ -90,68 +90,75 @@ def inputf():
 
 # yum spaghetti
 # input is 1-indexed
-# TODO: use switch statement
+# should refactor some more
 def main():
     print("-----\nSeating Organizer - yeet404\n-----")
     s = None
     saved = {}
     while True:
-        i = inputf()
-        cmd = i[0]
-        if cmd == "create":
-            try:
-                s = SeatLayout(int(i[1]), int(i[2]))
-            except (IndexError, ValueError):
-                print("Invalid syntax.")
-        elif cmd == "add":
-            try:
-                s.add(int(i[1])-1, int(i[2])-1, i[3])
-            except (IndexError, ValueError, AttributeError):
-                print("Invalid syntax.")
-        elif cmd == "rm":
-            try:
-                s.remove(int(i[1])-1, int(i[2])-1)
-            except (IndexError, ValueError, AttributeError):
-                print("Invalid syntax.")
-        elif cmd == "print":
-            try:
-                s.print()
-            except (UnboundLocalError, AttributeError):
-                print("Invalid syntax.")
-        elif cmd == "exposed":
-            try:
-                s.find_exposed(int(i[1])-1, int(i[2])-1)
-            except (IndexError, ValueError, AttributeError):
-                print("Invalid syntax.")
-        elif cmd == "save":
-            if s:
-                try:
-                    saved[str(i[1])] = s
-                except IndexError:
-                    print("Invalid syntax.")
-            else:
-                print("No layout to save.")
-        elif cmd == "access":
-            try:
-                s = saved[str(i[1])]
-            except (IndexError, KeyError):
-                print("Invalid syntax.")
-        # bad implementation
-        elif cmd == "del":
-            if not s:
-                print("No layout to delete.\n")
-                continue
-            try:
-                if i[1] == "this":
-                    del s
-                else:
-                    del saved[str(i[1])]
-            except (IndexError, KeyError):
-                print("Invalid syntax.") 
-        elif cmd == "end":
-            return
-        else:
-            print("Invalid command.")
+        try:
+            i = inputf()
+        except KeyboardInterrupt:
+            print("Type \"end\" to exit.\n")
+            continue
+        try:
+            match i[0]:
+                case "create":
+                    try:
+                        s = SeatLayout(int(i[1]), int(i[2]))
+                    except (IndexError, ValueError):
+                        print("Invalid syntax.")
+                case "add":
+                    try:
+                        s.add(int(i[1])-1, int(i[2])-1, i[3])
+                    except (IndexError, ValueError, AttributeError):
+                        print("Invalid syntax.")
+                case "rm":
+                    try:
+                        s.remove(int(i[1])-1, int(i[2])-1)
+                    except (IndexError, ValueError, AttributeError):
+                        print("Invalid syntax.")
+                case "print":
+                    try:
+                        s.print()
+                    except (UnboundLocalError, AttributeError):
+                        print("Invalid syntax.")
+                case "exposed":
+                    try:
+                        s.find_exposed(int(i[1])-1, int(i[2])-1)
+                    except (IndexError, ValueError, AttributeError):
+                        print("Invalid syntax.")
+                case "save":
+                    if s:
+                        try:
+                            saved[str(i[1])] = s
+                        except (KeyError, IndexError):
+                            print("Invalid syntax.")
+                    else:
+                        print("No layout to save.")
+                case "access":
+                    try:
+                        s = saved[str(i[1])]
+                    except (IndexError, KeyError):
+                        print("Invalid syntax.")
+                # bad implementation
+                case "del":
+                    if not s:
+                        print("No layout to delete.\n")
+                        continue
+                    try:
+                        if i[1] == "this":
+                            del s
+                        else:
+                            del saved[str(i[1])]
+                    except (IndexError, KeyError):
+                        print("Invalid syntax.") 
+                case "end":
+                    return
+                case _:
+                    print("Invalid command.")
+        except IndexError:
+            print("Type \"end\" to exit.")
         print()
 
 if __name__ == "__main__":
