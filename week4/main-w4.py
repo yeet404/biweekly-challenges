@@ -70,9 +70,24 @@ class SeatLayout:
         print("Person(s) exposed: \n - ", end="")
         print(*exposed, sep="\n - ")
     
+    # really bad but hopefully understandable
     def print(self):
+        # find longest string in self.layout
+        longest = 1
         for i in range(self.row):
-            print(*self.layout[i])
+            for j in self.layout[i]:
+                name_len = len(str(j))
+                if name_len > longest:
+                    longest = name_len
+        # ensure all seats/pipes (|) line up
+        MOST_SPACE = longest * " "
+        space = ""
+        for i in range(self.row):
+            for j in self.layout[i]:
+                space = MOST_SPACE[0:longest-len(str(j))]
+                print(f"{j}{space}", end="|")
+            print()
+            # print(*self.layout[i])
     
     # DEBUG - fill/empty all seats
     def debug(self, type):
