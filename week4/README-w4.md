@@ -1,5 +1,6 @@
 # Week 4 - Seating Organizer
 
+NOTE: must use python 3.10 or higher
 run with `python main-w4.py`
 
 ## Commands
