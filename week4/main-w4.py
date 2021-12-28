@@ -90,6 +90,7 @@ def inputf():
 
 # yum spaghetti
 # input is 1-indexed
+# TODO: use switch statement
 def main():
     print("-----\nSeating Organizer - yeet404\n-----")
     s = None
