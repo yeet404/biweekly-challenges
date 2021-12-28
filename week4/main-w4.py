@@ -87,7 +87,6 @@ class SeatLayout:
                 space = MOST_SPACE[0:longest-len(str(j))]
                 print(f"{j}{space}", end="|")
             print()
-            # print(*self.layout[i])
     
     # DEBUG - fill/empty all seats
     def debug(self, type):

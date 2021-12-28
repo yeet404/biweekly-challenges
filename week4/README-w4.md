@@ -3,6 +3,21 @@
 NOTE: must use python 3.10 or higher
 run with `python main-w4.py`
 
+## Row-Column Format
+
+Row-Column origin (r1c1 seat) is at top left corner
+
+Example:
+```
+        cols-->
+rows    0   0   0   0
+|       0   0   0   0
+|       0   0   0   0
+\/      0   0   0   0
+```
+- `0` represents an empty seat
+- arrows denote which direction row/col numbers increase
+
 ## Commands
 
 Note: All user input is 1-indexed. `main()` converts it into being 0-indexed as needed.
@@ -63,3 +78,5 @@ But if the user specifies a seating layout, then that layout, within the diction
 `create` creates a new `SeatLayout` object for `p` to point to. Therefore if `p->SeatLayoutObject` and the user then uses `create`, it is equivalent to `del this` => `create ...`.
 
 I'm guessing the garbage collector picks up the forgotten object? I have no idea lol.
+
+*Off-topic: `create` uses a col by row format since I figured that people usually describe things in terms of length x width, but I probably just made it more confusing*
