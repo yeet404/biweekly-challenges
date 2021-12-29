@@ -20,11 +20,16 @@ rows    0   0   0   0
 
 ## Commands
 
-Note: All user input is 1-indexed. `main()` converts it into being 0-indexed as needed.
+Notes:
+- All user input is 1-indexed. `main()` converts it into being 0-indexed as needed.
+- `add`, `rm`, `print`, `exposed` expect to recieve the active seating chart (they require `p->SomeSeatLayoutObject`)
+- For context about the "pointer", refer to the implementation
+- *Honestly I have no idea if this pointer analogy works at all lol*
 
 `create`
 - usage: `create <int:col> <int:row>`
 - creates seating layout with given columns and rows (length by width format)
+- *"pointer" representation: `p->NewSeatLayoutObject`*
 
 `add`
 - usage: `add <int:row> <int:col> <str:name>`
@@ -47,12 +52,18 @@ Note: All user input is 1-indexed. `main()` converts it into being 0-indexed as 
 - usage: `save <str:name>`
 - to make new save: `<str:name>` must be unique
 - to overwite previous save: `<str:name>` must be the same as the desired previous save
+- *"pointer" representation: `p->SeatLayoutObject`; this state of `SeatLayoutObject` is saved*
 
 `del`
 - usage: `del <str:name>` or `del this`
 - `<str:name>` deletes a saved seating chart
 - `this` deletes the current unsaved seating chart (similar to closing a program without saving; all old saves still exist)
-- Refer to the [implementation](https://github.com/yeet404/biweekly-challenges/blob/main/week4/README-w4.md#deleting) if it doesn't really make sense
+- *`this` "pointer" representation: `p->None`*
+
+`access`
+- usage: `access <str:savename>`
+- accesses a saved seating chart
+- *"pointer" representation: `p->SavedSeatLayoutObject`*
 
 `end`
 - usage: `end`
@@ -62,7 +73,7 @@ Note: All user input is 1-indexed. `main()` converts it into being 0-indexed as 
 
 ### Command implmentation
 
-The user commands basically interact with a pointer like `p`. By default, `p` points to `None` (`p = None` or `p->None`). `p` may point to `SeatLayout` objects.
+The user commands basically interact with a "pointer" like `p`. By default, `p` points to `None` (`p = None` or `p->None`). `p` may point to `SeatLayout` objects.
 
 ### Saving
 
