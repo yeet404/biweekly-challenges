@@ -1,3 +1,5 @@
+Edit: This explanation is bad.
+
 # Week 4 - Seating Organizer
 
 NOTE: must use python 3.10 or higher
